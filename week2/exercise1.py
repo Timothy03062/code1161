@@ -30,6 +30,6 @@ def usefulFunction():#The command will be name the six attributes of the compute
     what the line below does:
     https://docs.python.org/3/library/platform.html#platform.uname
     """
-    print(platform.uname())#returned system, node, release, version, machine and processor 
+    print(platform.uname())#returned system, node, release, version, machine and processor information
 
 usefulFunction()
