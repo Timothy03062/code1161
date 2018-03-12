@@ -3,7 +3,7 @@
 
 
 def add_5(a_number):
-    return(a_number + 5)
+    
     """Return a number that is 5 bigger than number given 
     return a_number + 5
     
@@ -21,7 +21,7 @@ def add_5(a_number):
 
 
 def adder(a_number, another_number):
-    return(a_number + another_number)
+    
     """Add two numbers.
 
     Same as above, but with any two numbers.
@@ -30,7 +30,7 @@ def adder(a_number, another_number):
 
 
 def shout(a_string):
-    return a_string.upper()
+    
 
     """Return a string in uppercase.
 
@@ -43,7 +43,7 @@ def shout(a_string):
 
 
 def really_shout(a_string):
-    return a_string.upper() + "!"
+    
 
     """Return a string in uppercase, with an exclamation mark on the end.
 
@@ -54,7 +54,7 @@ def really_shout(a_string):
     
 
 def shout_with_a_number(a_string, a_number):
-    return a_string.upper() + " " + str(a_number)
+    
     """Return a string in uppercase with a space and a_number concatentated.
     E.g.
     >>> shout_with_a_number('hello', 42)
