@@ -3,10 +3,7 @@
 
 
 def is_odd(a_number):
-    if a_number%2 !=0:
-        return True
-    else:
-        return False
+    
     """Return True if a_number is odd, and False if a_number is even.
 
     Look into modulo division using the '%' operator as one way of doing this.
@@ -27,17 +24,7 @@ def fix_it(moves=True, should_move=True):
     "Duct Tape"
     "No Problem"
     """
-    if moves == True:
-        if should_move == True:
-            return "No Problem"
-        else:
-            return "Duct Tape"
-    else:
-        if should_move == True:
-            return "WD-40"
-        else:
-            return "No Problem"
-
+    
 def loops_1a():
     
     """Make 10 stars.
@@ -46,11 +33,7 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    returnlist = []
-    for i in range(1,11):
-        returnlist.append("*")
-    
-    return returnlist 
+ 
 
 def loops_1c(number_of_items=5, symbol="#"):
     """Respond to variables.
@@ -61,11 +44,7 @@ def loops_1c(number_of_items=5, symbol="#"):
     E.g.: ['#', '#', '#', '#', '#']
     """
 
-    itemList = []
-    for i in range(number_of_items):
-        itemList.append(symbol)
-
-    return itemList
+    
 def loops_2():
     """Make a big square starfield.
 
@@ -84,14 +63,7 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    returnlist = []
-    for i in range(0,10):
-        list2 = []
-        for j in range(0,10):
-            list2.append("*")
-        returnlist.append(list2)
-    return returnlist
-
+    
 
 
 def loops_3():
@@ -115,16 +87,7 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    returnList = []
-    
-    for x in range(10):
-        list3 = []
-        for i in range(10):
-            list3 .append(str(x))
-        returnList.append(list3)
-
-        
-    return returnList
+   
   
 
 def loops_4():
@@ -144,17 +107,7 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    returnList = []
-
-    list4 = []
-    
-    for x in range(10):
-        list4.append(x)
-        
-    for i in range(10):
-        returnList.append(list4)
-
-    return returnList
+   
 
 
 def loops_5():
@@ -179,15 +132,7 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    returnList = []
-
-    for row in range(1,10):
-        list5 = []
-        for column in range(1,5):
-            list5.append("(i" + str(row) + ", j" + str(column) + ")")
-        returnList.append(list5)
-        
-    return returnList
+    
 
 
 def loops_6():
@@ -210,15 +155,6 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    returnlist = []
-    row= []
-    column= []
-    for i in range(row):
-        list6 = []
-        for j in range(column):
-            list6.append(j)
-        returnlist.append(list6)
-    return returnlist
 
 
 def loops_7():
