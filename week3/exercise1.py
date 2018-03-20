@@ -14,19 +14,13 @@ def loop_ranger(start, stop=None, step=1):
     """
     returnList = [] #Only works with For loop
 
-    for i in range(start, stop, step):
-        returnList.append(i)
-    return returnList 
-
-    returnList = []
-
-    start += step
+   
      
     while start < stop:
         returnList.append(start)
         start += step
 
-    return(start, returnList)
+    return(returnList)
 
 
     
@@ -128,28 +122,26 @@ def super_asker(low, high):
     that does it all!
     """
     response = input("Enter a number between " + str(low) + " and " + str(high) + ": ")
+    try: 
+        attempted_number = int(response)
+        if int(low) <= attempted_number <= int(high):
+            print("congrats")
+        else: 
+            super_asker(low, high)
+    except ValueError:
+        super_asker(low, high)
 
-    while response.isdigit() == False:
-
-        print("Invalid. Not a number")
-
-        response = input("Invalid. Enter a number between " + str(low) + " and " + str(high) + ": ")
-
+    """
     response = int(response)
-
     while response <= low or response >= high:
-        
         response = input("Invalid. Enter a number between " + str(low) + " and " + str(high) + ": ")
-
         while response.isdigit() == False:
-            
             print("Invalid. Not a number")
-            
             response = input("Invalid. Enter a number between " + str(low) + " and " + str(high) + ": ")
-            
         response = int(response)
 
     print("Ok")
+    """
     return(response)
 
 
