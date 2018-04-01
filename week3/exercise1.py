@@ -121,15 +121,16 @@ def super_asker(low, high):
     Combine stubborn_asker and not_number_rejector to make a function
     that does it all!
     """
-    response = input("Enter a number between " + str(low) + " and " + str(high) + ": ")
-    try: 
-        attempted_number = int(response)
-        if int(low) <= attempted_number <= int(high):
-            print("congrats")
-        else: 
-            super_asker(low, high)
-    except ValueError:
-        super_asker(low, high)
+    
+    while True: 
+        try: 
+            response = input("Enter a number between " + str(low) + " and " + str(high) + ": ")
+            attempted_number = int(response)
+            if low < attempted_number < high:
+                print("congrats")
+                return attempted_number
+        except ValueError:
+           print("Not a valid response")
 
     """
     response = int(response)
