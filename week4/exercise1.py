@@ -34,12 +34,17 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
+    
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    path = data["results"][0]
+    postcode = path["location"]["postcode"]
+    ID = path["id"]["value"]
+
+    return {"lastName":       path["name"]["last"],
+            "password":       path["login"]["password"],
+            "postcodePlusID": int(postcode) + int(ID)
             }
 
 
@@ -79,8 +84,21 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &minLength=
     """
-    pass
 
+    import requests
+    baseURL = "http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength={0}&maxLength={0}&limit=1"
+    pyramid_list = []
+    for i in range(3, 21, 2):
+        url = baseURL.format(i)
+        r = requests.get(url)
+        message = r.json()[0]['word']
+        pyramid_list.append(message)
+    for i in range(20, 3, -2):
+        url = baseURL.format(str(i))
+        r = requests.get(url)
+        message = r.json()[0]['word']
+        pyramid_list.append(message)
+    return pyramid_list
 
 def wunderground():
     """Find the weather station for Sydney.
@@ -94,7 +112,7 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "0437d25049a8d37d"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
@@ -103,10 +121,10 @@ def wunderground():
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
 
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    return {"state":           obs["display_location"]["state"],
+            "latitude":        obs["observation_location"]["latitude"],
+            "longitude":       obs["observation_location"]["longitude"],
+            "local_tz_offset": obs["local_tz_offset"]}
 
 
 def diarist():
@@ -122,7 +140,12 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    facts = open("Trispokedovetiles(laser).gcode", "r").read()
+    count = str(facts.count("M10 P1"))
+    open("lasers.pew", "w").write(count)
+
+   
+
 
 
 if __name__ == "__main__":
