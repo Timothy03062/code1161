@@ -49,8 +49,19 @@ def do_bunch_of_bad_things():
 # return a list of countdown messages, much like in the bad function above.
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
-    pass
+    messageList = []
+    if start < stop:
+        step = 1
+    else:
+        step = -1
 
+    while start != stop:
+        message = '{} {}'.format(message, start)
+        messageList.append(message)
+        start = start + step
+
+    messageList.append(completion_message)
+    return messageList
 
 # TRIANGLES
 
@@ -62,31 +73,45 @@ def countdown(message, start, stop, completion_message):
 # The stub functions are made for you, and each one is tested, so this should
 # hand hold quite nicely.
 def calculate_hypotenuse(base, height):
-    pass
+    import math 
+    hypotenuse = math.sqrt(base**2 + height**2)
+    return hypotenuse 
+
 
 
 def calculate_area(base, height):
-    pass
+    area = (base*height)/2
+    return area
+
 
 
 def calculate_perimeter(base, height):
-    pass
+    perimeter = base + height + calculate_hypotenuse(base, height)
+    return perimeter 
+
 
 
 def calculate_aspect(base, height):
-    pass
+    if height > base:
+        aspect = 'tall'
+    elif height < base:
+        aspect = 'wide'
+    elif height == base:
+        aspect = 'equal'
+
+    return aspect
 
 
 # Make sure you reuse the functions you've already got
 # Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
-    return {"area": None,
-            "perimeter": None,
-            "height": None,
-            "base": None,
-            "hypotenuse": None,
-            "aspect": None,
-            "units": None}
+    return {"area":calculate_area(base, height) ,
+            "perimeter": calculate_perimeter(base, height),
+            "height": height,
+            "base": base,
+            "hypotenuse": calculate_hypotenuse(base, height),
+            "aspect": calculate_aspect(base, height),
+            "units": units} 
 
 
 # this should return a multi line string that looks a bit like this:
@@ -136,17 +161,29 @@ def tell_me_about_this_right_triangle(facts_dictionary):
 
     facts = pattern.format(**facts_dictionary)
 
+    if facts_dictionary['aspect'] == "tall":
+        tall_info = tall.format(**facts_dictionary)
+        return (tall_info + facts)
+    elif facts_dictionary['aspect'] == "wide":
+        wide_info = wide.format(**facts_dictionary)
+        return (wide_info + facts)
+    else:
+        equal_info = equal.format(**facts_dictionary)
+        return (equal_info + facts)
+
 
 def triangle_master(base,
                     height,
                     return_diagram=False,
                     return_dictionary=False):
+    dictionary = get_triangle_facts(base, height)         
     if return_diagram and return_dictionary:
-        return None
+        return {'diagram': tell_me_about_this_right_triangle(dictionary),
+                'facts': dictionary}
     elif return_diagram:
-        return None
+        return (tell_me_about_this_right_triangle(dictionary))
     elif return_dictionary:
-        return None
+        return {'facts': dictionary}
     else:
         print("You're an odd one, you don't want anything!")
 
@@ -169,11 +206,22 @@ def wordy_pyramid():
 
 
 def get_a_word_of_length_n(length):
-    pass
+    import requests
+    baseURL = "http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength={}&maxLength={}&limit=1"
+    if length >= '' and isinstance(length, int):
+        try:
+            r = requests.get(baseURL + str(length)).text
+            return r
+        except Exception:
+            pass
 
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    wordList = []
+    for length in list_of_lengths:
+        word = get_a_word_of_length_n(length)
+        wordList.append(word)
+    return wordList
 
 
 if __name__ == "__main__":
