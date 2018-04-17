@@ -207,13 +207,16 @@ def wordy_pyramid():
 
 def get_a_word_of_length_n(length):
     import requests
-    baseURL = "http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength={}&maxLength={}&limit=1"
-    if length >= '' and isinstance(length, int):
-        try:
-            r = requests.get(baseURL + str(length)).text
-            return r
-        except Exception:
-            pass
++   baseURL = "http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength={}&maxLength={}&limit=1"
++            
++   ry:
++       if not type(length) == int:
++           return None
++       elif int(length) == 0:
++            return None
++       return requests.get(baseURL.format(length, length)).json()[0]['word']
++   except Exception:
++       return None
 
 
 def list_of_words_with_lengths(list_of_lengths):

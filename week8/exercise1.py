@@ -17,7 +17,7 @@ def greet(name="Towering Timmy"):
     return a string of "Hello" and the name argument.
     E.g. if given as "Towering Timmy" it should return "Hello Towering Timmy"
     """
-    pass
+    return "Hello" + name 
 
 
 def three_counter(input_list=[1, 4, 3, 5, 7, 1, 3, 2, 3, 3, 5, 3, 7]):
@@ -26,7 +26,11 @@ def three_counter(input_list=[1, 4, 3, 5, 7, 1, 3, 2, 3, 3, 5, 3, 7]):
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 5
     """
-    pass
+    counter = 0
+    for item in input_list:
+        if item == 3:
+            counter += 1
+    return counter
 
 
 def fizz_buzz():
@@ -44,7 +48,19 @@ def fizz_buzz():
     if it is. E.g. [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, ...]
     """
     fizzBuzzList = []
-    # your code here
+    for i in range(1, 101):
+        if i % 3 == 0 and i % 5 == 0:
+            fizzBuzzList.append("FizzBuzz")
+            
+        elif i % 3 == 0:
+            fizzBuzzList.append("Fizz")
+            
+        elif i % 5 == 0:
+            fizzBuzzList.append("Buzz")
+
+        else:
+            fizzBuzzList.append(i)
+            
     return fizzBuzzList
 
 
@@ -57,7 +73,10 @@ def put_behind_bars(input_string="very naughty boy"):
     TIP: conside using the 'join' method in Python.
     TIP: make sure that you have a pipe on both ends of the string.
     """
-    pass
+    Split = list(input_string)
+    Bars = [x+"|" for x in Split]
+    return "|" + "".join(Bars)
+    
 
 
 def pet_filter(letter="a"):
@@ -70,8 +89,12 @@ def pet_filter(letter="a"):
             "bali cattle", "gayal", "turkey", "goldfish", "rabbit", "koi",
             "canary", "society finch", "fancy mouse", "siamese fighting fish",
             "fancy rat and lab rat", "mink", "red fox", "hedgehog", "guppy"]
-    pass
-
+    
+    petsList = []
+    for p in pets:
+        if letter in p:
+            petsList.append(p)
+    return petsList 
 
 def best_letter_for_pets():
     """Return the letter that is present at least once in the most pet names.
@@ -81,7 +104,14 @@ def best_letter_for_pets():
     """
     import string
     the_alphabet = string.ascii_lowercase
-    pass
+    best_letter = ""
+    best_number = 0
+    for letter in the_alphabet:
+        count = len(pet_filter(letter))
+        if count > best_number:
+            best_number = count
+            best_letter = letter
+    return best_letter
 
 
 def make_filler_text_dictionary():
@@ -113,7 +143,15 @@ def make_filler_text_dictionary():
     """
     
     import requests
-    return
+    word_dictionary = {}
+    for number in range(3, 8):
+        word_dictionary[number] = []
+        for word in range(3):
+            url ="http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength=7&maxLength=7&limit=1" + str(number)
+            new_found_word = requests.get(url).text
+            print(new_found_word)
+            word_dictionary[number].append(new_found_word)
+    return word_dictionary
 
 
 def random_filler_text(number_of_words=200):
@@ -128,7 +166,12 @@ def random_filler_text(number_of_words=200):
         see line 77 of week4/hangman_leadboard.py for an example.
     """
     import random
-    pass
+    Dict = make_filler_text_dictionary()
+    paragraph_list = []
+    for _ in range(number_of_words):
+        word = Dict[random.randint(3, 7)][random.randint(0, 2)]
+        paragraph_list.append(word)
+    return " ".join(paragraph_list)
 
 
 def fast_filler(number_of_words=200):
@@ -144,7 +187,27 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    pass
+
+    import os 
+    import json 
+    import random 
+    if os.path.isfile("dict_racey.words"):
+        f = open("dict_racey.words", 'r')
+        d = json.loads(f.read())
+        f.close()
+    else:
+        d = make_filler_text_dictionary()
+        f = open("dict_racey.words", 'w')
+        f.write(json.dumps(d))
+        f.close()
+
+    paragraph_list = []
+    for _ in range(number_of_words):
+        number_of_letters = str(random.randint(3, 7))
+        which_word = random.randint(0, 2)
+        w = d[number_of_letters][which_word]
+        paragraph_list.append(w)
+    return " ".join(paragraph_list)
 
 
 if __name__ == '__main__':
