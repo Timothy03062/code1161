@@ -1,1 +1,4 @@
 TODO: Reflect on what you learned this week and what is still unclear.
+For this task, I learnt how to direct files to certain paths and activate the pose estimation for the camera using python. What I faild at doing however was getting the code to indicate that a person was calling for a taxi through his or her actions/movements. What my partner and I thouhgt was to either to use camera pixel and sections to judge whether a persons calling for a taxi or using a specific position for then thhe Y for the wrist geos above the Y of the shoulder, but we were unable to solve the issue. We did however know to use the dictionary that was provided ansd utlisie that in solving the problem.
+
+Unfortunately, our coding skills were not sufficient enough. We hope to eventually improve. 
