@@ -190,7 +190,7 @@ def fast_filler(number_of_words=200):
 
     import os 
     import json 
-    import random 
+    import random
     if os.path.isfile("dict_racey.words"):
         f = open("dict_racey.words", 'r')
         d = json.loads(f.read())
@@ -200,7 +200,6 @@ def fast_filler(number_of_words=200):
         f = open("dict_racey.words", 'w')
         f.write(json.dumps(d))
         f.close()
-
     paragraph_list = []
     for _ in range(number_of_words):
         number_of_letters = str(random.randint(3, 7))
